@@ -85,7 +85,12 @@ function viewListContacts() {
         management.appendChild(managementEl);
     }
 
-    returnContacts.forEach(viewArrayElements);
+    if (returnContacts !== null){
+        returnContacts.forEach(viewArrayElements);
+    }else{
+        console.log('add new contact');
+    }
+
 }
 let contactList = document.getElementById('contact-list');
 let contactDetail = document.getElementById('contact-detail');
@@ -96,8 +101,6 @@ nameInfo.addEventListener('click', showContact);
 function showContact() {
     contactList.style.display = 'none';
     contactDetail.style.display = 'block';
-
-    
 }
 
 let back = document.getElementById('back');
