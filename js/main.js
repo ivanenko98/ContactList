@@ -88,7 +88,7 @@ function viewListContacts() {
     if (returnContacts !== null){
         returnContacts.forEach(viewArrayElements);
     }else{
-        console.log('add new contact');
+        console.log('add  contact');
     }
 
 }
