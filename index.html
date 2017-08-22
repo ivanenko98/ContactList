@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+<div class="container clearfix">
+    <div class="contact-list clearfix" id="contact-list">
+        <h1 class="title">Телефонная книга</h1>
+        <div class="header">
+            <input type="text" onkeyup="searchContact()" id="search" placeholder="Поиск контактов">
+            <button id="btn-add">Новый контакт</button>
+            <div id="modal-add" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class="input-information">
+                        <h1>Новый контакт</h1>
+                        <h3>Имя:</h3>
+                        <input type="text" id="name-new">
+                        <h3>Фамилия:</h3>
+                        <input type="text" id="last-name-new">
+                        <h3>Мобильный:</h3>
+                        <input type="text" class="number-new">
+                        <h3>E-Mail:</h3>
+                        <input type="text" class="email-new">
+                        <button onclick="addContact()">Добавить контакт</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="titles">
+            <h3>Имя:</h3>
+            <h3>Мобильный:</h3>
+            <h3>E-Mail:</h3>
+        </div>
+
+        <div id="contact-info">
+        <div id="name-info">
+
+        </div>
+        <div id="numbers">
+
+        </div>
+        <div id="emails">
+
+        </div>
+        <div id="management">
+            
+        </div>
+        </div>
+
+        <!--<div class="contact-info">-->
+            <!--<div class="name-info">-->
+                <!--<span class="name">Петр</span>-->
+                <!--<span class="last-name">Іваненко</span>-->
+            <!--</div>-->
+            <!--<div class="numbers">-->
+                <!--<span class="number">+380681662690</span>-->
+            <!--</div>-->
+            <!--<div class="emails">-->
+                <!--<span class="email">ivanenko.oleg.m@gmail.com</span>-->
+            <!--</div>-->
+            <!--<div class="management">-->
+                <!--<ul>-->
+                    <!--<li><i class="fa fa-pencil" aria-hidden="true"></i></li>-->
+                    <!--<li><i class="fa fa-eye" aria-hidden="true"></i></li>-->
+                    <!--<li><i class="fa fa-trash" aria-hidden="true"></i></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="contact-info">-->
+            <!--<div class="name-info">-->
+                <!--<span class="name">Сергей</span>-->
+                <!--<span class="last-name">Іваненко</span>-->
+            <!--</div>-->
+            <!--<div class="numbers">-->
+                <!--<span class="number">+380681662690</span>-->
+            <!--</div>-->
+            <!--<div class="emails">-->
+                <!--<span class="email">ivanenko.oleg.m@gmail.com</span>-->
+            <!--</div>-->
+            <!--<div class="management">-->
+                <!--<ul>-->
+                    <!--<li><i class="fa fa-pencil" aria-hidden="true"></i></li>-->
+                    <!--<li><i class="fa fa-eye" aria-hidden="true"></i></li>-->
+                    <!--<li><i class="fa fa-trash" aria-hidden="true"></i></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="contact-info">-->
+            <!--<div class="name-info">-->
+                <!--<span class="name">Алексей</span>-->
+                <!--<span class="last-name">Іваненко</span>-->
+            <!--</div>-->
+            <!--<div class="numbers">-->
+                <!--<span class="number">+380681662690</span>-->
+            <!--</div>-->
+            <!--<div class="emails">-->
+                <!--<span class="email">ivanenko.oleg.m@gmail.com</span>-->
+            <!--</div>-->
+            <!--<div class="management">-->
+                <!--<ul>-->
+                    <!--<li><i class="fa fa-pencil" aria-hidden="true"></i></li>-->
+                    <!--<li><i class="fa fa-eye" aria-hidden="true"></i></li>-->
+                    <!--<li><i class="fa fa-trash" aria-hidden="true"></i></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+        <div class="contact-detail" id="contact-detail">
+            <h1 class="title">Просмотр контакта</h1>
+            <div id="name-d">
+                <span class="name-d">Олег</span>
+                <span class="last-name-d">Іваненко</span>
+            </div>
+            <div id="numbers-d">
+                <span class="number-d">+380681662690</span>
+            </div>
+            <div id="emails-d">
+                <span class="email-d">ivanenko.oleg.m@gmail.com</span>
+            </div>
+            <div class="back" id="back">
+                <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                <span>Назад</span>
+            </div>
+        </div>
+    </div>
+<script src="js/main.js"></script>
+</body>
+</html>
