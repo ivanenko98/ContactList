@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e219385c-0685-434a-a852-64bddebdc889" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.js" afterPath="$PROJECT_DIR$/js/main.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -170,7 +168,7 @@
       <updated>1503392271188</updated>
       <workItem from="1503392273377" duration="1443000" />
       <workItem from="1503430189498" duration="3668000" />
-      <workItem from="1503456374450" duration="3333000" />
+      <workItem from="1503456374450" duration="3374000" />
     </task>
     <task id="LOCAL-00001" summary="add new contact">
       <created>1503393327899</created>
@@ -193,11 +191,18 @@
       <option name="project" value="LOCAL" />
       <updated>1503457037476</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add show dynamic information contact">
+      <created>1503459752999</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1503459752999</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8444000" />
+    <option name="totallyTimeSpent" value="8485000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -232,7 +237,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add new contact" />
     <MESSAGE value="add show static information contact" />
-    <option name="LAST_COMMIT_MESSAGE" value="add show static information contact" />
+    <MESSAGE value="add show dynamic information contact" />
+    <option name="LAST_COMMIT_MESSAGE" value="add show dynamic information contact" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
