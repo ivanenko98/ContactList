@@ -85,7 +85,7 @@ function viewListContacts() {
         emails.appendChild(emailsEl);
 
         let managementEl = document.createElement('span');
-        managementEl.innerHTML = '<ul><li><i class="fa fa-pencil" aria-hidden="true"></i></li><li><i class="fa fa-eye" aria-hidden="true" onclick="showContact()"></i></li><li><i class="fa fa-trash" aria-hidden="true"></i></li></ul>';
+        managementEl.innerHTML = '<ul><li><i class="fa fa-pencil" aria-hidden="true"></i></li><li><i class="fa fa-eye" aria-hidden="true" onclick="showContact(this.id)" id="'+ returnContacts[index].id +'"></i></li><li><i class="fa fa-trash" aria-hidden="true"></i></li></ul>';
         management.appendChild(managementEl);
 
     }
@@ -104,29 +104,38 @@ let nameInfo = document.getElementById('name-info');
 
 nameInfo.addEventListener('click', showContact);
 
-function showContact() {
+function showContact(contactId) {
     let nameD = document.getElementById('name-d');
     let numbersD = document.getElementById('numbers-d');
     let emailsD = document.getElementById('emails-d');
-    
-    // function comparisonId(element, index, array) {
-    //     if (array.id === )
-    // }
-    //
-    // returnContacts.forEach();
 
-    // let nameDEl = document.createElement('span');
-    // nameDEl.innerHTML = '<span class="name-d">' + returnContacts[index].name + '</span>' + ' ' + '<span class="last-name-d">' + returnContacts[index].last_name + '</span>';
-    // nameD.appendChild(nameDEl);
-    //
-    // let numbersDEl = document.createElement('span');
-    // numbersDEl.innerHTML = '<span class="numbers-d">' + returnContacts[index].number + '</span>';
-    // numbersD.appendChild(numbersDEl);
-    //
-    // let emailsDEl = document.createElement('span');
-    // emailsDEl.innerHTML = '<span class="emails-d">' + returnContacts[index].email + '</span>';
-    // emailsD.appendChild(emailsDEl);
+    nameD.innerHTML = '';
+    numbersD.innerHTML = '';
+    emailsD.innerHTML = '';
 
+    function comparisonId(element, index, array) {
+        console.log(returnContacts[index].id);
+        console.log(contactId);
+
+        if (returnContacts[index].id == contactId){
+
+            let nameDEl = document.createElement('span');
+            nameDEl.innerHTML = '<span class="name-d">' + returnContacts[index].name + '</span>' + ' ' + '<span class="last-name-d">' + returnContacts[index].last_name + '</span>';
+            nameD.appendChild(nameDEl);
+
+            let numbersDEl = document.createElement('span');
+            numbersDEl.innerHTML = '<span class="numbers-d">' + returnContacts[index].number + '</span>';
+            numbersD.appendChild(numbersDEl);
+
+            let emailsDEl = document.createElement('span');
+            emailsDEl.innerHTML = '<span class="emails-d">' + returnContacts[index].email + '</span>';
+            emailsD.appendChild(emailsDEl);
+
+            console.log('if');
+        }
+    }
+
+    returnContacts.forEach(comparisonId);
 
     contactList.style.display = 'none';
     contactDetail.style.display = 'block';
