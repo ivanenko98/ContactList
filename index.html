@@ -8,66 +8,123 @@
 </head>
 <body>
 <div class="container clearfix">
-    <div class="contact-list clearfix" id="contact-list">
-        <h1 class="title">Телефонная книга</h1>
-        <div class="header">
-            <input type="text" onkeyup="searchContact()" id="search" placeholder="Поиск контактов">
-            <button id="btn-add">Новый контакт</button>
-            <div id="modal-add" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <div class="input-information">
-                        <h1>Новый контакт</h1>
-                        <h3>Имя:</h3>
-                        <input type="text" id="name-new">
-                        <h3>Фамилия:</h3>
-                        <input type="text" id="last-name-new">
+    <div class="header">
+        <div id="modal-add" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="input-information">
+                    <h1>Новый контакт</h1>
+
+                    <h3>Имя:</h3>
+                    <input id="name-new">
+                    <h3>Фамилия:</h3>
+                    <input id="last-name-new">
+
+                    <div id="numbers-block">
                         <h3>Мобильный:</h3>
-                        <input type="text" class="number-new">
-                        <h3>E-Mail:</h3>
-                        <input type="text" class="email-new">
-                        <button onclick="addContact()">Добавить контакт</button>
+                        <input class="number-new">
+                        <span class = "plus" id="plus-number"><i class="fa fa-plus" aria-hidden="true"></i></span>
                     </div>
+
+                    <div id="emails-block">
+                        <h3>E-Mail:</h3>
+                        <input class="email-new">
+                        <span class = "plus" id="plus-email"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                    </div>
+
+                    <button onclick="addContact()">Добавить контакт</button>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="contactListEmpty" id="contact-list-empty">
+        <h1 class="title">Телефонная книга</h1>
+        <h1 class="title404">Нет контактов. Добавьте первый контакт!
+        </h1><button class="btn404" id="btn-404">Новый контакт</button>
+    </div>
+    <div class="contact-list clearfix" id="contact-list">
+        <h1 class="title">Телефонная книга</h1>
+        <input type="text" onkeyup="searchContact()" id="search" placeholder="Поиск контактов">
+        <button id="btn-add">Новый контакт</button>
         <div class="titles">
             <h3>Имя:</h3>
             <h3>Мобильный:</h3>
             <h3>E-Mail:</h3>
         </div>
 
-        <div id="contact-info">
-        <div id="name-info">
+        <!--<div class="contact-info">-->
+            <!--<div id="name-info">-->
 
-        </div>
-        <div id="numbers">
+            <!--</div>-->
+            <!--<div id="numbers">-->
 
-        </div>
-        <div id="emails">
+            <!--</div>-->
+            <!--<div id="emails">-->
 
-        </div>
-        <div id="management">
+            <!--</div>-->
+            <!--<div id="management">-->
 
-        </div>
-        </div>
+            <!--</div>-->
+        <!--</div>-->
     </div>
-        <div class="contact-detail" id="contact-detail">
-            <h1 class="title">Просмотр контакта</h1>
+    <div class="contact-detail" id="contact-detail">
+        <h1 class="title" id="title-d">Просмотр контакта</h1>
+        <div class="edit">
+            <span>Редактировать</span>
+            <i class="fa fa-pencil"></i>
+        </div>
+        <div class="block-information clearfix">
+            <h3 class="name-title">Имя и Фамилия:</h3>
+            <h3 class="mob-title">Мобильный:</h3>
             <div id="name-d">
-
             </div>
             <div id="numbers-d">
-
             </div>
+            <h3 class="em-title">E-Mail:</h3>
             <div id="emails-d">
-
-            </div>
-            <div class="back" id="back">
-                <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-                <span>Назад</span>
             </div>
         </div>
+        <div class="back" id="back-d">
+            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+            <span>Назад</span>
+        </div>
+    </div>
+
+
+    <div class="contact-edit" id="contact-edit">
+        <h1 class="title" id="title-e"></h1>
+        <div class="save">
+            <!--<span>Сохранить изменения</span>-->
+            <!--<i class="fa fa-pencil"></i>-->
+        </div>
+        <div class="block-information clearfix">
+            <h3 class="name-title">Имя и Фамилия:</h3>
+            <span class="mob-title">
+                <div class="mob-add">
+                    <h3>Мобильный:</h3>
+                    <i class="fa fa-plus" id="plus-number-e"></i>
+                </div>
+            </span>
+            <div id="name-e">
+            </div>
+            <div id="numbers-e">
+            </div>
+            <div class="em-title">
+                <div class="em-add">
+                    <h3>E-Mail:</h3>
+                    <i class="fa fa-plus" id="plus-email-e"></i>
+                </div>
+            </div>
+            <div id="emails-e">
+            </div>
+        </div>
+
+        <div class="back" id="back-e">
+            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+            <span>Назад</span>
+        </div>
+    </div>
+
     </div>
 <script src="js/main.js"></script>
 </body>

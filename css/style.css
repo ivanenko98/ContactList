@@ -31,6 +31,7 @@ p, h2, h3{
 }
 .title{
     text-align: center;
+    font-size: 45px;
 }
 #search{
     margin: 20px 20px 20px 0;
@@ -40,11 +41,11 @@ p, h2, h3{
     border-radius: 3px;
     font-size: 18px;
 }
-#numbers,
-#emails{
+.numbers,
+.emails{
     display: inline-block;
 }
-#management{
+.management{
     text-align: right;
     width: 25%;
 }
@@ -54,11 +55,11 @@ p, h2, h3{
     width: 100%;
     float: left;
 }
-#management ul li{
+.management ul li{
      padding: 10px;
      cursor: pointer;
 }
-#management ul li:hover{
+.management ul li:hover{
     color: #000;
 }
 .name-info{
@@ -71,8 +72,8 @@ p, h2, h3{
     padding: 10px 0 10px 0;
     display: inline-block;
 }
-#numbers,
-#emails{
+.numbers,
+.emails{
     width: 25%;
 }
 .titles{
@@ -84,10 +85,13 @@ p, h2, h3{
     width: 33.3%;
     text-align: left;
 }
-#contact-info{
+.contact-info{
     width: 100%;
     display: flex;
     justify-content: space-between;
+    border: 1px solid #000000;
+    margin-bottom: 5px;
+    padding: 5px;
 }
 .modal{
     display: none;
@@ -115,7 +119,7 @@ p, h2, h3{
     cursor: pointer;
 }
 .input-information input{
-    display: block;
+    display: inline-block;
     margin: 5px;
     width: 50%;
     height: 25px;
@@ -127,6 +131,7 @@ p, h2, h3{
 }
 .input-information button,
 #btn-add{
+    display: block;
     padding: 10px;
     margin-top: 17px;
     background: #1924a5;
@@ -142,37 +147,138 @@ p, h2, h3{
 }
 #name-info span{
     cursor: pointer;
-    display: inline-block;
+    display: inline;
 }
 #name-info span:hover{
     color: #000;
 }
-#numbers span,
-#emails span{
+.numbers span,
+.emails span{
     display: block;
 }
-/*CONTACT DETAIL*/
+#name-info > span{
+    width: 100%;
+}
+.btn404{
+    margin: 0 auto;
+    display: block;
+    width: 25%;
+    height: 50px;
+    font-size: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    float: none;
+}
+.title404{
+    color: #3caebb;
+    text-align: center;
+    padding: 30px;
+}
+.plus{
+    cursor: pointer;
+}
+.plus:hover{
+    color: #000000;
+}
 #contact-detail{
     display: none;
 }
-#name-d{
+#name-d,
+#name-e{
     font-size: 30px;
     float: left;
     width: 40%;
     padding: 20px 20px 20px 0;
 }
-#numbers-d{
+#numbers-d,
+#numbers-e{
     font-size: 25px;
     float: right;
-    width: 50%;
+    width: 40%;
     padding: 20px;
 }
-#emails-d{
+#emails-d,
+#emails-e{
     font-size: 25px;
     float: inherit;
-    width: 50%;
+    width: 40%;
+    padding: 20px 20px 20px 0;
 }
 .back{
     margin-top: 40px;
     cursor: pointer;
+}
+.edit,
+.save{
+    float: right;
+    cursor: pointer;
+    width: 100%;
+    text-align: right;
+}
+.edit span,
+.save span{
+    margin-right: 5px;
+}
+.edit:hover,
+.save:hover{
+    color: #000;
+}
+#edit-name,
+#edit-last-name,
+.edit-numbers,
+.edit-emails{
+    padding: 5px;
+    width: 70%;
+    display: block;
+    font-size: 23px;
+}
+#contact-edit{
+    display: none;
+}
+#contact-list-empty{
+    display: none;
+}
+.numbers-el,
+.emails-el{
+    display: block;
+    padding-bottom: 10px;
+}
+.mob-title{
+    float: right;
+    width: 40%;
+    padding: 20px 20px 0 20px;
+}
+.em-title{
+    width: 40%;
+    padding: 20px 20px 20px 0;
+    float: left;
+}
+.name-title{
+    width: 40%;
+    float: left;
+    padding: 20px 20px 0 0;
+}
+.mob-title h3{
+    display: inline-block;
+}
+#plus-number-e,
+#plus-email-e{
+    float: right;
+    cursor: pointer;
+}
+.mob-add{
+    width: 70%;
+}
+.em-add{
+    width: 70%;
+}
+.em-add h3{
+    float: left;
+}
+.number-new,
+.email-new{
+    padding: 5px;
+    width: 70%;
+    display: block;
+    font-size: 23px;
 }
