@@ -187,21 +187,20 @@ p, h2, h3{
 #name-e{
     font-size: 30px;
     float: left;
-    width: 40%;
+    width: 100%;
     padding: 20px 20px 20px 0;
 }
 #numbers-d,
 #numbers-e{
     font-size: 25px;
     float: right;
-    width: 40%;
+    width: 100%;
     padding: 20px;
 }
 #emails-d,
 #emails-e{
     font-size: 25px;
-    float: inherit;
-    width: 40%;
+    width: 100%;
     padding: 20px 20px 20px 0;
 }
 .back{
@@ -231,6 +230,7 @@ p, h2, h3{
     width: 70%;
     display: block;
     font-size: 23px;
+    float: left;
 }
 #contact-edit{
     display: none;
@@ -245,16 +245,16 @@ p, h2, h3{
 }
 .mob-title{
     float: right;
-    width: 40%;
+    width: 100%;
     padding: 20px 20px 0 20px;
 }
 .em-title{
-    width: 40%;
+    width: 100%;
     padding: 20px 20px 20px 0;
     float: left;
 }
 .name-title{
-    width: 40%;
+    width: 100%;
     float: left;
     padding: 20px 20px 0 0;
 }
@@ -281,4 +281,23 @@ p, h2, h3{
     width: 70%;
     display: block;
     font-size: 23px;
+}
+.fl{
+    width: 40%;
+    float: left;
+}
+.fr{
+    width: 40%;
+    float: right;
+}
+.delete-input-number,
+.delete-input-email{
+    float: right;
+    width: 20%;
+    padding-top: 6px;
+    font-size: 20px;
+    cursor: pointer;
+}
+i.fa{
+    font-size: 20px;
 }

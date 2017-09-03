@@ -47,11 +47,9 @@ function addContact() {
 
         for (i = 0; i < numbers_new.length; i++){
             contact.number.push(numbers_new[i].value);
-            // console.log(numbers_new[i].value);
         }
         for (i = 0; i < emails_new.length; i++){
             contact.email.push(emails_new[i].value);
-            console.log(emails_new[i].value);
         }
 
         // localStorage.removeItem('contacts');
@@ -251,7 +249,6 @@ function deleteContact(contactId) {
             returnContacts.splice(index, 1);
             let contactInfoDel = document.getElementsByClassName('contact-info')[index];
             contactList.removeChild(contactInfoDel);
-            console.log('Element deleted');
         }
 
     }
@@ -286,6 +283,8 @@ function editContact(contactId) {
     function comparisonIdEdit(element, index, array) {
         if (returnContacts[index].id == contactId){
 
+
+
             let titleEEl = document.createElement('span');
             titleEEl.innerHTML = '<h1 class="title" id="title-e">Редактирование контакта</h1>';
             titleE.appendChild(titleEEl);
@@ -299,14 +298,16 @@ function editContact(contactId) {
             nameE.appendChild(nameEEl);
 
             for (i = 0; i < array[index].number.length; i++){
+                let nextId = Date.now() + i;
                 let numbersEEl = document.createElement('span');
-                numbersEEl.innerHTML = '<input class="edit-numbers" value='+ array[index].number[i] +'>';
+                numbersEEl.innerHTML = '<div class = "input-block-number" id="'+ nextId +'"><input class="edit-numbers" value='+ array[index].number[i] +'><i class="fa fa-times delete-input-number" id="'+ nextId +'" onclick="deleteNumberElement(this.id)" aria-hidden="true"></i></div>';
                 numbersE.appendChild(numbersEEl);
             }
 
             for (i = 0; i < array[index].email.length; i++){
+                let nextId = Date.now() + i;
                 let emailsEEl = document.createElement('span');
-                emailsEEl.innerHTML = '<input class="edit-emails" value='+ array[index].email[i] +'>';
+                emailsEEl.innerHTML = '<div class = "input-block-email" id="'+ nextId +'"><input class="edit-emails" value='+ array[index].email[i] +'><i class="fa fa-times delete-input-email" id="'+ nextId +'" onclick="deleteEmailElement(this.id)" aria-hidden="true"></i></div>';
                 emailsE.appendChild(emailsEEl);
             }
 
@@ -349,12 +350,22 @@ function saveChanges(contactId) {
 
             for (i = 0; i < numbersE.length; i++){
                 let numbersE = document.getElementsByClassName('edit-numbers')[i].value;
-                returnContacts[index].number.push(numbersE);
+                if (numbersE !== ''){
+                    returnContacts[index].number.push(numbersE);
+                }else{
+                    console.log('Not Worked');
+                }
+
             }
 
             for (i = 0; i < emailsE.length; i++){
                 let emailsE = document.getElementsByClassName('edit-emails')[i].value;
-                returnContacts[index].email.push(emailsE);
+                if (emailsE !== ''){
+                    returnContacts[index].email.push(emailsE);
+                }else{
+                    console.log('Not Worked');
+                }
+
             }
 
             let serialContacts = JSON.stringify(returnContacts);
@@ -374,7 +385,6 @@ function validation(returnContacts) {
         let contactListEmpty = document.getElementById('contact-list-empty');
         contactList.style.display = 'none';
         contactListEmpty.style.display = 'block';
-        console.log('add new contact');
     }
 }
 
@@ -390,7 +400,6 @@ function addNumber() {
     numbersAE.innerHTML = '<input class="number-new">';
     numbersBlock.appendChild(numbersAE);
 
-    console.log('plusNumber');
 }
 function addEmail() {
     let emailsBlock = document.getElementById('emails-block');
@@ -399,18 +408,18 @@ function addEmail() {
     emailsAE.innerHTML = '<input class="email-new">';
     emailsBlock.appendChild(emailsAE);
 
-    console.log('plusEmail');
 }
 let plusNumberE = document.getElementById('plus-number-e');
 plusNumberE.addEventListener('click', addNumberEdit);
 function addNumberEdit() {
     let numbersBlock = document.getElementById('numbers-e');
 
+    let nextId = Date.now();
+
     let numbersAE = document.createElement('span');
-    numbersAE.innerHTML = '<input class="edit-numbers">';
+    numbersAE.innerHTML = '<div class = "input-block-number" id="'+ nextId +'"><input class="edit-numbers"><i class="fa fa-times delete-input-number" id="'+ nextId +'" onclick="deleteNumberElement(this.id)" aria-hidden="true"></i></div>\n';
     numbersBlock.appendChild(numbersAE);
 
-    console.log('plusNumber');
 }
 
 let plusEmailE = document.getElementById('plus-email-e');
@@ -418,9 +427,38 @@ plusEmailE.addEventListener('click', addEmailEdit);
 function addEmailEdit() {
     let emailsBlock = document.getElementById('emails-e');
 
+    let nextId = Date.now();
+
     let emailsAE = document.createElement('span');
-    emailsAE.innerHTML = '<input class="edit-emails">';
+    emailsAE.innerHTML = '<div class = "input-block-email" id="'+ nextId +'"><input class="edit-emails"><i class="fa fa-times delete-input-email" id="'+ nextId +'" onclick="deleteEmailElement(this.id)" aria-hidden="true"></i></div>';
+
     emailsBlock.appendChild(emailsAE);
 
-    console.log('plusEmail');
+}
+
+function deleteNumberElement(idInput) {
+    let numbersE = document.getElementsByClassName('input-block-number');
+    let i;
+
+    for (i = 0; i < numbersE.length; i++){
+        let numbersE = document.getElementsByClassName('input-block-number');
+
+        if (numbersE[i].id == idInput){
+            numbersE[i].parentNode.removeChild(numbersE[i]);
+        }
+    }
+
+}
+function deleteEmailElement(idInput) {
+    let emailsE = document.getElementsByClassName('input-block-email');
+    let i;
+
+    for (i = 0; i < emailsE.length; i++){
+        let emailsE = document.getElementsByClassName('input-block-email');
+
+        if (emailsE[i].id == idInput){
+            emailsE[i].parentNode.removeChild(emailsE[i]);
+        }
+    }
+
 }
