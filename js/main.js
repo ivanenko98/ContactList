@@ -78,12 +78,6 @@ function addContact() {
         alert('Заполните обязательные поля: Имя и Мобильный');
     }
 }
-function searchContact() {
-    let search, filter, contact, name;
-    search = document.getElementById('search');
-    filter = search.value.toUpperCase();
-    contact = document.getElementsByClassName('contact-info');
-}
 
 function viewListContacts() {
     let contactList = document.getElementById('contact-list');
@@ -460,5 +454,43 @@ function deleteEmailElement(idInput) {
             emailsE[i].parentNode.removeChild(emailsE[i]);
         }
     }
+}
+function searchContact() {
+    // let input, filter, contact, name, lastName, numbers, emails;
+    let input = document.getElementById('search');
+    let filter = input.value.toUpperCase();
+    let contacts = document.getElementsByClassName('contact-info');
+    let i, n, em;
 
+
+    for (i = 0; i < contacts.length; i++){
+        let name = contacts[i].getElementsByClassName('name-info')[0].getElementsByClassName('name')[0];
+        let lastName = contacts[i].getElementsByClassName('name-info')[0].getElementsByClassName('last-name')[0];
+        let number = contacts[i].getElementsByClassName('numbers')[0].getElementsByClassName('number');
+        let email = contacts[i].getElementsByClassName('emails')[0].getElementsByClassName('email');
+        
+        function searchByNumber() {
+
+            for (n = 0; n < number.length; n++){
+                if (number[n].innerHTML.toUpperCase().indexOf(filter) > -1){
+                    return true;
+                }
+            }
+        }
+
+        function searchByEmail() {
+
+            for (em = 0; em < email.length; em++){
+                if (email[em].innerHTML.toUpperCase().indexOf(filter) > -1){
+                    return true;
+                }
+            }
+        }
+
+        if (name.innerHTML.toUpperCase().indexOf(filter) > -1 || lastName.innerHTML.toUpperCase().indexOf(filter) > -1 || searchByNumber() === true || searchByEmail() === true){
+            contacts[i].style.display = '';
+        }else{
+            contacts[i].style.display = 'none';
+        }
+  }
 }
