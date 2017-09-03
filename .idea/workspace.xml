@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e219385c-0685-434a-a852-64bddebdc889" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.js" afterPath="$PROJECT_DIR$/js/main.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,8 +20,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="46" column="95" lean-forward="true" selection-start-line="46" selection-start-column="95" selection-end-line="47" selection-end-column="51" />
+            <state relative-caret-position="308">
+              <caret line="65" column="22" lean-forward="true" selection-start-line="65" selection-start-column="22" selection-end-line="65" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -107,8 +105,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/js/main.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/css/style.css" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -214,7 +212,7 @@
       <workItem from="1504366573039" duration="9123000" />
       <workItem from="1504416295526" duration="9230000" />
       <workItem from="1504453698478" duration="4681000" />
-      <workItem from="1504466847102" duration="4367000" />
+      <workItem from="1504466847102" duration="4470000" />
     </task>
     <task id="LOCAL-00001" summary="add new contact">
       <created>1503393327899</created>
@@ -265,11 +263,18 @@
       <option name="project" value="LOCAL" />
       <updated>1504425980841</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="complete">
+      <created>1504471484406</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1504471484406</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120748000" />
+    <option name="totallyTimeSpent" value="120851000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1370" height="741" extended-state="0" />
@@ -307,7 +312,8 @@
     <MESSAGE value="add show dynamic information contact" />
     <MESSAGE value="add more numbers and emails" />
     <MESSAGE value="add more numbers and emails delete" />
-    <option name="LAST_COMMIT_MESSAGE" value="add more numbers and emails delete" />
+    <MESSAGE value="complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -746,8 +752,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="46" column="95" lean-forward="true" selection-start-line="46" selection-start-column="95" selection-end-line="47" selection-end-column="51" />
+        <state relative-caret-position="308">
+          <caret line="65" column="22" lean-forward="true" selection-start-line="65" selection-start-column="22" selection-end-line="65" selection-end-column="22" />
           <folding />
         </state>
       </provider>
