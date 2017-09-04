@@ -82,21 +82,11 @@ function addContact() {
 function viewListContacts() {
     let contactList = document.getElementById('contact-list');
 
-
-
-    // nameInfo.innerHTML = '';
-    // numbers.innerHTML = '';
-    // emails.innerHTML = '';
-    // management.innerHTML = '';
-
-
     function viewArrayElements(element, index, array) {
         let returnContacts = JSON.parse(localStorage.getItem('contacts'));
         let contactInfoDel = document.getElementsByClassName('contact-info')[index];
         if (contactInfoDel){
             contactInfoDel.innerHTML = '';
-        }else{
-            console.log('Elements not found');
         }
         let contactInfo = document.createElement('div');
         contactInfo.setAttribute('class', 'contact-info');
@@ -106,7 +96,7 @@ function viewListContacts() {
         let contactArrInfo = document.getElementsByClassName('contact-info')[index];
         let nameInfoEl = document.createElement('div');
         nameInfoEl.setAttribute('class', 'name-info');
-        nameInfoEl.innerHTML = '<span class="name" onclick="showContact(this.id)" id="'+ returnContacts[index].id +'">' + returnContacts[index].name + '</span>' + ' ' + '<span class="last-name">' + returnContacts[index].last_name + '</span>';
+        nameInfoEl.innerHTML = '<span class="name" onclick="showContact(this.id)" id="'+ returnContacts[index].id +'">' + returnContacts[index].name + '</span>' + ' ' + '<span class="last-name" onclick="showContact(this.id)" id="'+ returnContacts[index].id +'">' + returnContacts[index].last_name + '</span>';
         contactArrInfo.appendChild(nameInfoEl);
 
         let i;
@@ -149,8 +139,6 @@ function viewListContacts() {
     validation(returnContacts);
 }
 let contactList = document.getElementById('contact-list');
-let contactDetail = document.getElementById('contact-detail');
-let contactEdit = document.getElementById('contact-edit');
 
 
 function showContact(contactId) {
@@ -163,8 +151,6 @@ function showContact(contactId) {
     let numbersD = document.getElementById('numbers-d');
     let emailsD = document.getElementById('emails-d');
     let i;
-    // let numbersD = document.getElementById('numbers-d');
-    // let emailsD = document.getElementById('emails-d');
 
     let returnContacts = JSON.parse(localStorage.getItem('contacts'));
 
@@ -455,8 +441,7 @@ function deleteEmailElement(idInput) {
         }
     }
 }
-function searchContact() {
-    // let input, filter, contact, name, lastName, numbers, emails;
+function searchContact(){
     let input = document.getElementById('search');
     let filter = input.value.toUpperCase();
     let contacts = document.getElementsByClassName('contact-info');
