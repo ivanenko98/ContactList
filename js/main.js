@@ -51,8 +51,6 @@ function addContact() {
         for (i = 0; i < emails_new.length; i++){
             contact.email.push(emails_new[i].value);
         }
-
-        // localStorage.removeItem('contacts');
         if (localStorage.getItem('contacts') === null){
             let returnContacts = [];
             returnContacts.push(contact);
@@ -72,8 +70,16 @@ function addContact() {
 
         document.getElementById('name-new').value = null;
         document.getElementById('last-name-new').value = null;
-        document.getElementsByClassName('number-new')[0].value = null;
-        document.getElementsByClassName('email-new')[0].value = null;
+        let numbers = document.getElementsByClassName('number-new');
+        let emails = document.getElementsByClassName('email-new');
+        let n;
+        for (n = 0; n < numbers.length; n++){
+            document.getElementsByClassName('number-new')[n].value = null;
+        }
+        let em;
+        for (em = 0; em < emails.length; em++){
+            document.getElementsByClassName('email-new')[em].value = null;
+        }
     }else{
         alert('Заполните обязательные поля: Имя и Мобильный');
     }
@@ -379,7 +385,6 @@ function addNumber() {
     let numbersAE = document.createElement('span');
     numbersAE.innerHTML = '<input class="number-new">';
     numbersBlock.appendChild(numbersAE);
-
 }
 function addEmail() {
     let emailsBlock = document.getElementById('emails-block');
@@ -387,7 +392,6 @@ function addEmail() {
     let emailsAE = document.createElement('span');
     emailsAE.innerHTML = '<input class="email-new">';
     emailsBlock.appendChild(emailsAE);
-
 }
 let plusNumberE = document.getElementById('plus-number-e');
 plusNumberE.addEventListener('click', addNumberEdit);
