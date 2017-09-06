@@ -382,17 +382,22 @@ plusEmail.addEventListener('click', addEmail);
 function addNumber() {
     let numbersBlock = document.getElementById('numbers-block');
 
+    let nextId = Date.now();
+
     let numbersAE = document.createElement('span');
-    numbersAE.innerHTML = '<input class="number-new">';
+    numbersAE.innerHTML = '<div class = "input-block-number" id="'+ nextId +'"><input class="number-new"><i class="fa fa-times delete-number" id="'+ nextId +'" onclick="deleteNumberElement(this.id)" aria-hidden="true"></i></div>';
     numbersBlock.appendChild(numbersAE);
 }
 function addEmail() {
     let emailsBlock = document.getElementById('emails-block');
 
+    let nextId = Date.now();
+
     let emailsAE = document.createElement('span');
-    emailsAE.innerHTML = '<input class="email-new">';
+    emailsAE.innerHTML = '<div class = "input-block-email" id="'+ nextId +'"><input class="email-new"><i class="fa fa-times delete-email" id="'+ nextId +'" onclick="deleteEmailElement(this.id)" aria-hidden="true"></i></div>';
     emailsBlock.appendChild(emailsAE);
 }
+
 let plusNumberE = document.getElementById('plus-number-e');
 plusNumberE.addEventListener('click', addNumberEdit);
 function addNumberEdit() {
@@ -401,7 +406,7 @@ function addNumberEdit() {
     let nextId = Date.now();
 
     let numbersAE = document.createElement('span');
-    numbersAE.innerHTML = '<div class = "input-block-number" id="'+ nextId +'"><input class="edit-numbers"><i class="fa fa-times delete-input-number" id="'+ nextId +'" onclick="deleteNumberElement(this.id)" aria-hidden="true"></i></div>\n';
+    numbersAE.innerHTML = '<div class = "input-block-number" id="'+ nextId +'"><input class="edit-numbers"><i class="fa fa-times delete-input-number" id="'+ nextId +'" onclick="deleteNumberElement(this.id)" aria-hidden="true"></i></div>';
     numbersBlock.appendChild(numbersAE);
 
 }
@@ -431,7 +436,6 @@ function deleteNumberElement(idInput) {
             numbersE[i].parentNode.removeChild(numbersE[i]);
         }
     }
-
 }
 function deleteEmailElement(idInput) {
     let emailsE = document.getElementsByClassName('input-block-email');
@@ -445,6 +449,7 @@ function deleteEmailElement(idInput) {
         }
     }
 }
+
 function searchContact(){
     let input = document.getElementById('search');
     let filter = input.value.toUpperCase();

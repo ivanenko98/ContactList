@@ -327,3 +327,12 @@ i.fa{
 .last-name{
     cursor: pointer;
 }
+.delete-number,
+.delete-email{
+    padding: 5px;
+    cursor: pointer;
+}
+.delete-number:hover,
+.delete-email:hover{
+    color: #000000;
+}
