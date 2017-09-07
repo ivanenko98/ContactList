@@ -65,51 +65,55 @@ function addContact() {
     }
 
     if ((name_new !== '') && (numbers_new !== '')){
-        if (validationNumber() !== false && validationEmail() !== false){
-            let id_contact = Date.now();
+        if (validationNumber() !== false){
+            if (validationEmail() !== false){
+                let id_contact = Date.now();
 
-            let contact = {
-                name: name_new,
-                last_name: last_name_new,
-                number: [],
-                email: [],
-                id: id_contact
-            };
+                let contact = {
+                    name: name_new,
+                    last_name: last_name_new,
+                    number: [],
+                    email: [],
+                    id: id_contact
+                };
 
-            for (i = 0; i < numbers_new.length; i++){
-                contact.number.push(numbers_new[i].value);
-            }
-            for (i = 0; i < emails_new.length; i++){
-                contact.email.push(emails_new[i].value);
-            }
-            if (localStorage.getItem('contacts') === null){
-                let returnContacts = [];
-                returnContacts.push(contact);
-                let serialContacts = JSON.stringify(returnContacts);
-                localStorage.setItem('contacts', serialContacts);
-                viewListContacts();
+                for (i = 0; i < numbers_new.length; i++){
+                    contact.number.push(numbers_new[i].value);
+                }
+                for (i = 0; i < emails_new.length; i++){
+                    contact.email.push(emails_new[i].value);
+                }
+                if (localStorage.getItem('contacts') === null){
+                    let returnContacts = [];
+                    returnContacts.push(contact);
+                    let serialContacts = JSON.stringify(returnContacts);
+                    localStorage.setItem('contacts', serialContacts);
+                    viewListContacts();
+                }else{
+                    let returnContacts = JSON.parse(localStorage.getItem('contacts'));
+                    returnContacts.push(contact);
+                    let serialContacts = JSON.stringify(returnContacts);
+                    localStorage.setItem('contacts', serialContacts);
+                    viewListContacts();
+                }
+                modal.style.display = 'none';
+                contactListEmpty.style.display = 'none';
+                contactList.style.display = 'block';
+
+                document.getElementById('name-new').value = null;
+                document.getElementById('last-name-new').value = null;
+                let numbers = document.getElementsByClassName('number-new');
+                let emails = document.getElementsByClassName('email-new');
+                let n;
+                for (n = 0; n < numbers.length; n++){
+                    document.getElementsByClassName('number-new')[n].value = null;
+                }
+                let em;
+                for (em = 0; em < emails.length; em++){
+                    document.getElementsByClassName('email-new')[em].value = null;
+                }
             }else{
-                let returnContacts = JSON.parse(localStorage.getItem('contacts'));
-                returnContacts.push(contact);
-                let serialContacts = JSON.stringify(returnContacts);
-                localStorage.setItem('contacts', serialContacts);
-                viewListContacts();
-            }
-            modal.style.display = 'none';
-            contactListEmpty.style.display = 'none';
-            contactList.style.display = 'block';
-
-            document.getElementById('name-new').value = null;
-            document.getElementById('last-name-new').value = null;
-            let numbers = document.getElementsByClassName('number-new');
-            let emails = document.getElementsByClassName('email-new');
-            let n;
-            for (n = 0; n < numbers.length; n++){
-                document.getElementsByClassName('number-new')[n].value = null;
-            }
-            let em;
-            for (em = 0; em < emails.length; em++){
-                document.getElementsByClassName('email-new')[em].value = null;
+                alert('Введите корректный E-mail');
             }
         }else{
             alert('Поле "Мобильный" должно содержать только цифры');
