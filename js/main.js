@@ -34,17 +34,38 @@ function addContact() {
     let emails_new = document.getElementsByClassName('email-new');
     let i;
 
-    // function validationNumber() {
-    //     let i;
-    //     for (i = 0; i < numbers_new.length; i++){
-    //         if (typeof numbers_new[i] === 'number') {
-    //             return true;
-    //         }
-    //     }
-    // }
+    function validationNumber() {
+        let n;
+        for (n = 0; n < numbers_new.length; n++){
+            let re = /^\d[\d\(\)\ -]{4,14}\d$/;
+            let myPhone = numbers_new[n].value;
+            let valid = re.test(myPhone);
+
+            if (valid){
+                console.log('jyguy');
+            }else{
+                return false;
+            }
+        }
+    }
+
+    function validationEmail() {
+        let em;
+        for (em = 0; em < emails_new.length; em++){
+            let re = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
+            let myEmail = emails_new[em].value;
+            let valid = re.test(myEmail);
+
+            if (valid){
+                console.log('jyguy');
+            }else{
+                return false;
+            }
+        }
+    }
 
     if ((name_new !== '') && (numbers_new !== '')){
-        // if (validationNumber() === true){
+        if (validationNumber() !== false && validationEmail() !== false){
             let id_contact = Date.now();
 
             let contact = {
@@ -90,9 +111,9 @@ function addContact() {
             for (em = 0; em < emails.length; em++){
                 document.getElementsByClassName('email-new')[em].value = null;
             }
-        // }else{
-        //     alert('Поле "Мобильный" должно содержать только цифры');
-        // }
+        }else{
+            alert('Поле "Мобильный" должно содержать только цифры');
+        }
     }else{
         alert('Заполните обязательные поля: Имя и Мобильный');
     }
