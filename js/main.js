@@ -24,6 +24,7 @@ function showModal(btn) {
     };
 }
 
+
 function addContact() {
     let contactList = document.getElementById('contact-list');
     let contactListEmpty = document.getElementById('contact-list-empty');
@@ -369,46 +370,96 @@ function saveChanges(contactId) {
 
     let returnContacts = JSON.parse(localStorage.getItem('contacts'));
 
+    function validationNumber() {
+        let n;
+        for (n = 0; n < numbersE.length; n++){
+            let re = /^\d[\d\(\)\ -]{4,14}\d$/;
+            let myPhone = numbersE[n].value;
+            let valid = re.test(myPhone);
+
+            if (valid){
+
+            }else{
+                return false;
+            }
+        }
+    }
+
+    function validationEmail() {
+        let em;
+        for (em = 0; em < emailsE.length; em++){
+            let re = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
+            let myEmail = emailsE[em].value;
+            let valid = re.test(myEmail);
+
+            if (valid){
+
+            }else{
+                return false;
+            }
+        }
+    }
+
     function comparisonIdEdit(element, index, array) {
         if (returnContacts[index].id == contactId){
 
-            returnContacts[index] = {
-                name: nameE,
-                last_name: lastNameE,
-                number: [],
-                email: [],
-                id: returnContacts[index].id
-            };
+            if ((nameE !== '') && (numbersE !== '')){
+                if (validationNumber() !== false){
+                    if (validationEmail() !== false){
+                        returnContacts[index] = {
+                            name: nameE,
+                            last_name: lastNameE,
+                            number: [],
+                            email: [],
+                            id: returnContacts[index].id
+                        };
 
-            for (i = 0; i < numbersE.length; i++){
-                let numbersE = document.getElementsByClassName('edit-numbers')[i].value;
-                if (numbersE !== ''){
-                    returnContacts[index].number.push(numbersE);
+                        for (i = 0; i < numbersE.length; i++){
+                            let numbersE = document.getElementsByClassName('edit-numbers')[i].value;
+                            if (numbersE !== ''){
+                                returnContacts[index].number.push(numbersE);
+                            }else{
+                                console.log('Not Worked');
+                            }
+
+                        }
+
+                        for (i = 0; i < emailsE.length; i++){
+                            let emailsE = document.getElementsByClassName('edit-emails')[i].value;
+                            if (emailsE !== ''){
+                                returnContacts[index].email.push(emailsE);
+                            }else{
+                                console.log('Not Worked');
+                            }
+
+                        }
+
+                        let serialContacts = JSON.stringify(returnContacts);
+                        // localStorage.removeItem('contacts');
+                        localStorage.setItem('contacts', serialContacts);
+                        viewListContacts();
+                    }else{
+                        alert('Введите корректный E-mail');
+                    }
                 }else{
-                    console.log('Not Worked');
+                    alert('Поле "Мобильный" должно содержать только цифры (от 4 до 14 символов)');
                 }
-
+            }else{
+                alert('Заполните обязательные поля: Имя и Мобильный');
             }
 
-            for (i = 0; i < emailsE.length; i++){
-                let emailsE = document.getElementsByClassName('edit-emails')[i].value;
-                if (emailsE !== ''){
-                    returnContacts[index].email.push(emailsE);
-                }else{
-                    console.log('Not Worked');
-                }
 
-            }
-
-            let serialContacts = JSON.stringify(returnContacts);
-            // localStorage.removeItem('contacts');
-            localStorage.setItem('contacts', serialContacts);
-            viewListContacts();
         }
     }
 
     returnContacts.forEach(comparisonIdEdit);
-    showContact(contactId);
+    if ((nameE !== '') && (numbersE !== '')) {
+        if (validationNumber() !== false) {
+            if (validationEmail() !== false) {
+                showContact(contactId);
+            }
+        }
+    }
 }
 
 function validation(returnContacts) {
