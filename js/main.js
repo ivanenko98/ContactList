@@ -34,52 +34,65 @@ function addContact() {
     let emails_new = document.getElementsByClassName('email-new');
     let i;
 
+    // function validationNumber() {
+    //     let i;
+    //     for (i = 0; i < numbers_new.length; i++){
+    //         if (typeof numbers_new[i] === 'number') {
+    //             return true;
+    //         }
+    //     }
+    // }
+
     if ((name_new !== '') && (numbers_new !== '')){
-        let id_contact = Date.now();
+        // if (validationNumber() === true){
+            let id_contact = Date.now();
 
-        let contact = {
-            name: name_new,
-            last_name: last_name_new,
-            number: [],
-            email: [],
-            id: id_contact
-        };
+            let contact = {
+                name: name_new,
+                last_name: last_name_new,
+                number: [],
+                email: [],
+                id: id_contact
+            };
 
-        for (i = 0; i < numbers_new.length; i++){
-            contact.number.push(numbers_new[i].value);
-        }
-        for (i = 0; i < emails_new.length; i++){
-            contact.email.push(emails_new[i].value);
-        }
-        if (localStorage.getItem('contacts') === null){
-            let returnContacts = [];
-            returnContacts.push(contact);
-            let serialContacts = JSON.stringify(returnContacts);
-            localStorage.setItem('contacts', serialContacts);
-            viewListContacts();
-        }else{
-            let returnContacts = JSON.parse(localStorage.getItem('contacts'));
-            returnContacts.push(contact);
-            let serialContacts = JSON.stringify(returnContacts);
-            localStorage.setItem('contacts', serialContacts);
-            viewListContacts();
-        }
-        modal.style.display = 'none';
-        contactListEmpty.style.display = 'none';
-        contactList.style.display = 'block';
+            for (i = 0; i < numbers_new.length; i++){
+                contact.number.push(numbers_new[i].value);
+            }
+            for (i = 0; i < emails_new.length; i++){
+                contact.email.push(emails_new[i].value);
+            }
+            if (localStorage.getItem('contacts') === null){
+                let returnContacts = [];
+                returnContacts.push(contact);
+                let serialContacts = JSON.stringify(returnContacts);
+                localStorage.setItem('contacts', serialContacts);
+                viewListContacts();
+            }else{
+                let returnContacts = JSON.parse(localStorage.getItem('contacts'));
+                returnContacts.push(contact);
+                let serialContacts = JSON.stringify(returnContacts);
+                localStorage.setItem('contacts', serialContacts);
+                viewListContacts();
+            }
+            modal.style.display = 'none';
+            contactListEmpty.style.display = 'none';
+            contactList.style.display = 'block';
 
-        document.getElementById('name-new').value = null;
-        document.getElementById('last-name-new').value = null;
-        let numbers = document.getElementsByClassName('number-new');
-        let emails = document.getElementsByClassName('email-new');
-        let n;
-        for (n = 0; n < numbers.length; n++){
-            document.getElementsByClassName('number-new')[n].value = null;
-        }
-        let em;
-        for (em = 0; em < emails.length; em++){
-            document.getElementsByClassName('email-new')[em].value = null;
-        }
+            document.getElementById('name-new').value = null;
+            document.getElementById('last-name-new').value = null;
+            let numbers = document.getElementsByClassName('number-new');
+            let emails = document.getElementsByClassName('email-new');
+            let n;
+            for (n = 0; n < numbers.length; n++){
+                document.getElementsByClassName('number-new')[n].value = null;
+            }
+            let em;
+            for (em = 0; em < emails.length; em++){
+                document.getElementsByClassName('email-new')[em].value = null;
+            }
+        // }else{
+        //     alert('Поле "Мобильный" должно содержать только цифры');
+        // }
     }else{
         alert('Заполните обязательные поля: Имя и Мобильный');
     }
@@ -105,27 +118,35 @@ function viewListContacts() {
         nameInfoEl.innerHTML = '<span class="name" onclick="showContact(this.id)" id="'+ returnContacts[index].id +'">' + returnContacts[index].name + '</span>' + ' ' + '<span class="last-name" onclick="showContact(this.id)" id="'+ returnContacts[index].id +'">' + returnContacts[index].last_name + '</span>';
         contactArrInfo.appendChild(nameInfoEl);
 
-        let i;
+        // let i;
 
-        let numbersEl = document.createElement('div');
-        numbersEl.setAttribute('class', 'numbers');
-        contactArrInfo.appendChild(numbersEl);
+        // let numbersEl = document.createElement('div');
+        // numbersEl.setAttribute('class', 'numbers');
+        // contactArrInfo.appendChild(numbersEl);
+        // let numbers = document.getElementsByClassName('numbers')[index];
+        // for (i = 0; i < array[index].number.length; i++){
+        //     let numbersEl = document.createElement('div');
+        //     numbersEl.innerHTML = '<span class="number">' + returnContacts[index].number[i] + '</span>';
+        //     numbers.appendChild(numbersEl);
+        // }
+
+        let numbersEBl = document.createElement('div');
+        numbersEBl.setAttribute('class', 'numbers');
+        contactArrInfo.appendChild(numbersEBl);
         let numbers = document.getElementsByClassName('numbers')[index];
-        for (i = 0; i < array[index].number.length; i++){
-            let numbersEl = document.createElement('div');
-            numbersEl.innerHTML = '<span class="number">' + returnContacts[index].number[i] + '</span>';
+        let numbersEl = document.createElement('div');
+            numbersEl.innerHTML = '<span class="number">' + returnContacts[index].number[0] + '</span>';
             numbers.appendChild(numbersEl);
-        }
 
-        let emailsEl = document.createElement('div');
-        emailsEl.setAttribute('class', 'emails');
-        contactArrInfo.appendChild(emailsEl);
-        let emails = document.getElementsByClassName('emails')[index];
-        for (i = 0; i < array[index].email.length; i++){
-            let emailsEl = document.createElement('div');
-            emailsEl.innerHTML = '<span class="email">' + returnContacts[index].email[i] + '</span>';
-            emails.appendChild(emailsEl);
-        }
+        // let emailsEl = document.createElement('div');
+        // emailsEl.setAttribute('class', 'emails');
+        // contactArrInfo.appendChild(emailsEl);
+        // let emails = document.getElementsByClassName('emails')[index];
+        // for (i = 0; i < array[index].email.length; i++){
+        //     let emailsEl = document.createElement('div');
+        //     emailsEl.innerHTML = '<span class="email">' + returnContacts[index].email[i] + '</span>';
+        //     emails.appendChild(emailsEl);
+        // }
         let managementEl = document.createElement('div');
         managementEl.setAttribute('class', 'management');
         managementEl.innerHTML = '<ul><li><i class="fa fa-pencil" aria-hidden="true" onclick="editContact(this.id)" id="'+ returnContacts[index].id +'"></i></li><li><i class="fa fa-eye" aria-hidden="true" onclick="showContact(this.id)" id="'+ returnContacts[index].id +'"></i></li><li><i class="fa fa-trash" aria-hidden="true" onclick="deleteContact(this.id)" id="'+ returnContacts[index].id +'"></i></li></ul>';
