@@ -42,7 +42,7 @@ function addContact() {
             let valid = re.test(myPhone);
 
             if (valid){
-                console.log('jyguy');
+
             }else{
                 return false;
             }
@@ -57,7 +57,7 @@ function addContact() {
             let valid = re.test(myEmail);
 
             if (valid){
-                console.log('jyguy');
+
             }else{
                 return false;
             }
