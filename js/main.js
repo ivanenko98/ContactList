@@ -68,50 +68,54 @@ function addContact() {
     if ((name_new !== '') && (numbers_new !== '')){
         if (validationNumber() !== false){
             if (validationEmail() !== false){
-                let id_contact = Date.now();
+                if (checkForUniqueness(name_new, last_name_new, numbers_new, emails_new) !== false){
+                    let id_contact = Date.now();
 
-                let contact = {
-                    name: name_new,
-                    last_name: last_name_new,
-                    number: [],
-                    email: [],
-                    id: id_contact
-                };
+                    let contact = {
+                        name: name_new,
+                        last_name: last_name_new,
+                        number: [],
+                        email: [],
+                        id: id_contact
+                    };
 
-                for (i = 0; i < numbers_new.length; i++){
-                    contact.number.push(numbers_new[i].value);
-                }
-                for (i = 0; i < emails_new.length; i++){
-                    contact.email.push(emails_new[i].value);
-                }
-                if (localStorage.getItem('contacts') === null){
-                    let returnContacts = [];
-                    returnContacts.push(contact);
-                    let serialContacts = JSON.stringify(returnContacts);
-                    localStorage.setItem('contacts', serialContacts);
-                    viewListContacts();
+                    for (i = 0; i < numbers_new.length; i++){
+                        contact.number.push(numbers_new[i].value);
+                    }
+                    for (i = 0; i < emails_new.length; i++){
+                        contact.email.push(emails_new[i].value);
+                    }
+                    if (localStorage.getItem('contacts') === null){
+                        let returnContacts = [];
+                        returnContacts.push(contact);
+                        let serialContacts = JSON.stringify(returnContacts);
+                        localStorage.setItem('contacts', serialContacts);
+                        viewListContacts();
+                    }else{
+                        let returnContacts = JSON.parse(localStorage.getItem('contacts'));
+                        returnContacts.push(contact);
+                        let serialContacts = JSON.stringify(returnContacts);
+                        localStorage.setItem('contacts', serialContacts);
+                        viewListContacts();
+                    }
+                    modal.style.display = 'none';
+                    contactListEmpty.style.display = 'none';
+                    contactList.style.display = 'block';
+
+                    document.getElementById('name-new').value = null;
+                    document.getElementById('last-name-new').value = null;
+                    let numbers = document.getElementsByClassName('number-new');
+                    let emails = document.getElementsByClassName('email-new');
+                    let n;
+                    for (n = 0; n < numbers.length; n++){
+                        document.getElementsByClassName('number-new')[n].value = null;
+                    }
+                    let em;
+                    for (em = 0; em < emails.length; em++){
+                        document.getElementsByClassName('email-new')[em].value = null;
+                    }
                 }else{
-                    let returnContacts = JSON.parse(localStorage.getItem('contacts'));
-                    returnContacts.push(contact);
-                    let serialContacts = JSON.stringify(returnContacts);
-                    localStorage.setItem('contacts', serialContacts);
-                    viewListContacts();
-                }
-                modal.style.display = 'none';
-                contactListEmpty.style.display = 'none';
-                contactList.style.display = 'block';
-
-                document.getElementById('name-new').value = null;
-                document.getElementById('last-name-new').value = null;
-                let numbers = document.getElementsByClassName('number-new');
-                let emails = document.getElementsByClassName('email-new');
-                let n;
-                for (n = 0; n < numbers.length; n++){
-                    document.getElementsByClassName('number-new')[n].value = null;
-                }
-                let em;
-                for (em = 0; em < emails.length; em++){
-                    document.getElementsByClassName('email-new')[em].value = null;
+                    alert('Контакт с такими данными уже существует');
                 }
             }else{
                 alert('Введите корректный E-mail');
@@ -144,18 +148,6 @@ function viewListContacts() {
         nameInfoEl.innerHTML = '<span class="name" onclick="showContact(this.id)" id="'+ returnContacts[index].id +'">' + returnContacts[index].name + '</span>' + ' ' + '<span class="last-name" onclick="showContact(this.id)" id="'+ returnContacts[index].id +'">' + returnContacts[index].last_name + '</span>';
         contactArrInfo.appendChild(nameInfoEl);
 
-        // let i;
-
-        // let numbersEl = document.createElement('div');
-        // numbersEl.setAttribute('class', 'numbers');
-        // contactArrInfo.appendChild(numbersEl);
-        // let numbers = document.getElementsByClassName('numbers')[index];
-        // for (i = 0; i < array[index].number.length; i++){
-        //     let numbersEl = document.createElement('div');
-        //     numbersEl.innerHTML = '<span class="number">' + returnContacts[index].number[i] + '</span>';
-        //     numbers.appendChild(numbersEl);
-        // }
-
         let numbersEBl = document.createElement('div');
         numbersEBl.setAttribute('class', 'numbers');
         contactArrInfo.appendChild(numbersEBl);
@@ -164,15 +156,6 @@ function viewListContacts() {
             numbersEl.innerHTML = '<span class="number">' + returnContacts[index].number[0] + '</span>';
             numbers.appendChild(numbersEl);
 
-        // let emailsEl = document.createElement('div');
-        // emailsEl.setAttribute('class', 'emails');
-        // contactArrInfo.appendChild(emailsEl);
-        // let emails = document.getElementsByClassName('emails')[index];
-        // for (i = 0; i < array[index].email.length; i++){
-        //     let emailsEl = document.createElement('div');
-        //     emailsEl.innerHTML = '<span class="email">' + returnContacts[index].email[i] + '</span>';
-        //     emails.appendChild(emailsEl);
-        // }
         let managementEl = document.createElement('div');
         managementEl.setAttribute('class', 'management');
         managementEl.innerHTML = '<ul><li><i class="fa fa-pencil" aria-hidden="true" onclick="editContact(this.id)" id="'+ returnContacts[index].id +'"></i></li><li><i class="fa fa-eye" aria-hidden="true" onclick="showContact(this.id)" id="'+ returnContacts[index].id +'"></i></li><li><i class="fa fa-trash" aria-hidden="true" onclick="deleteContact(this.id)" id="'+ returnContacts[index].id +'"></i></li></ul>';
@@ -243,8 +226,6 @@ function showContact(contactId) {
 
     returnContacts.forEach(comparisonId);
 
-
-
     contactList.style.display = 'none';
     contactDetail.style.display = 'block';
     contactEdit.style.display = 'none';
@@ -295,9 +276,6 @@ function deleteContact(contactId) {
     viewListContacts();
 }
 
-// let edit = document.getElementsByClassName('edit')[0];
-// edit.addEventListener('click', editContact);
-
 function editContact(contactId) {
     let titleE = document.getElementById('title-e');
     let save = document.getElementsByClassName('save')[0];
@@ -315,8 +293,6 @@ function editContact(contactId) {
 
     function comparisonIdEdit(element, index, array) {
         if (returnContacts[index].id == contactId){
-
-
 
             let titleEEl = document.createElement('span');
             titleEEl.innerHTML = '<h1 class="title" id="title-e">Редактирование контакта</h1>';
@@ -365,7 +341,6 @@ function saveChanges(contactId) {
     let lastNameE = document.getElementById('edit-last-name').value;
     let numbersE = document.getElementsByClassName('edit-numbers');
     let emailsE = document.getElementsByClassName('edit-emails');
-    // let emailsE = document.getElementById('edit-emails').value;
     let i;
 
     let returnContacts = JSON.parse(localStorage.getItem('contacts'));
@@ -403,41 +378,45 @@ function saveChanges(contactId) {
     function comparisonIdEdit(element, index, array) {
         if (returnContacts[index].id == contactId){
 
-            if ((nameE !== '') && (numbersE !== '')){
+            if ((nameE !== '') && (numbersE.value !== '')){
                 if (validationNumber() !== false){
                     if (validationEmail() !== false){
-                        returnContacts[index] = {
-                            name: nameE,
-                            last_name: lastNameE,
-                            number: [],
-                            email: [],
-                            id: returnContacts[index].id
-                        };
+                        if (checkForUniqueness(nameE, lastNameE, numbersE, emailsE, contactId) !== false){
+                            returnContacts[index] = {
+                                name: nameE,
+                                last_name: lastNameE,
+                                number: [],
+                                email: [],
+                                id: returnContacts[index].id
+                            };
 
-                        for (i = 0; i < numbersE.length; i++){
-                            let numbersE = document.getElementsByClassName('edit-numbers')[i].value;
-                            if (numbersE !== ''){
-                                returnContacts[index].number.push(numbersE);
-                            }else{
-                                console.log('Not Worked');
+                            for (i = 0; i < numbersE.length; i++){
+                                let numbersE = document.getElementsByClassName('edit-numbers')[i].value;
+                                if (numbersE !== ''){
+                                    returnContacts[index].number.push(numbersE);
+                                }else{
+                                    console.log('Not Worked');
+                                }
+
                             }
 
-                        }
+                            for (i = 0; i < emailsE.length; i++){
+                                let emailsE = document.getElementsByClassName('edit-emails')[i].value;
+                                if (emailsE !== ''){
+                                    returnContacts[index].email.push(emailsE);
+                                }else{
+                                    console.log('Not Worked');
+                                }
 
-                        for (i = 0; i < emailsE.length; i++){
-                            let emailsE = document.getElementsByClassName('edit-emails')[i].value;
-                            if (emailsE !== ''){
-                                returnContacts[index].email.push(emailsE);
-                            }else{
-                                console.log('Not Worked');
                             }
 
+                            let serialContacts = JSON.stringify(returnContacts);
+                            localStorage.setItem('contacts', serialContacts);
+                            viewListContacts();
+                            showContact(contactId);
+                        }else{
+                            alert('Контакт с такими данными уже существует');
                         }
-
-                        let serialContacts = JSON.stringify(returnContacts);
-                        // localStorage.removeItem('contacts');
-                        localStorage.setItem('contacts', serialContacts);
-                        viewListContacts();
                     }else{
                         alert('Введите корректный E-mail');
                     }
@@ -453,13 +432,6 @@ function saveChanges(contactId) {
     }
 
     returnContacts.forEach(comparisonIdEdit);
-    if ((nameE !== '') && (numbersE !== '')) {
-        if (validationNumber() !== false) {
-            if (validationEmail() !== false) {
-                showContact(contactId);
-            }
-        }
-    }
 }
 
 function validation(returnContacts) {
@@ -550,38 +522,74 @@ function deleteEmailElement(idInput) {
 function searchContact(){
     let input = document.getElementById('search');
     let filter = input.value.toUpperCase();
-    let contacts = document.getElementsByClassName('contact-info');
+    let contacts = JSON.parse(localStorage.getItem('contacts'));
+    let contactsE = document.getElementsByClassName('contact-info');
     let i, n, em;
 
-
     for (i = 0; i < contacts.length; i++){
-        let name = contacts[i].getElementsByClassName('name-info')[0].getElementsByClassName('name')[0];
-        let lastName = contacts[i].getElementsByClassName('name-info')[0].getElementsByClassName('last-name')[0];
-        let number = contacts[i].getElementsByClassName('numbers')[0].getElementsByClassName('number');
-        let email = contacts[i].getElementsByClassName('emails')[0].getElementsByClassName('email');
-        
-        function searchByNumber() {
+              let name = contacts[i].name;
+              let lastName = contacts[i].last_name;
+              let number = contacts[i].number;
+              let email = contacts[i].email;
 
-            for (n = 0; n < number.length; n++){
-                if (number[n].innerHTML.toUpperCase().indexOf(filter) > -1){
-                    return true;
-                }
-            }
+              function searchByNumber() {
+
+                  for (n = 0; n < number.length; n++){
+                      if (number[n].toUpperCase().indexOf(filter) > -1){
+                          return true;
+                      }
+                  }
+              }
+
+              function searchByEmail() {
+
+                  for (em = 0; em < email.length; em++){
+                      if (email[em].toUpperCase().indexOf(filter) > -1){
+                          return true;
+                      }
+                  }
+              }
+
+              if (name.toUpperCase().indexOf(filter) > -1 || lastName.toUpperCase().indexOf(filter) > -1 || searchByNumber() === true || searchByEmail() === true){
+                  contactsE[i].style.display = '';
+              }else{
+                  contactsE[i].style.display = 'none';
+              }
         }
+}
+function checkForUniqueness(name_new, last_name_new, numbers_new, emails_new, contactId) {
+    let contacts = returnContacts;
 
-        function searchByEmail() {
+    for (let i = 0; i < contacts.length; i++){
+        let name = contacts[i].name;
+        let lastName = contacts[i].last_name;
+        let number = contacts[i].number;
+        let email = contacts[i].email;
 
-            for (em = 0; em < email.length; em++){
-                if (email[em].innerHTML.toUpperCase().indexOf(filter) > -1){
-                    return true;
-                }
-            }
-        }
-
-        if (name.innerHTML.toUpperCase().indexOf(filter) > -1 || lastName.innerHTML.toUpperCase().indexOf(filter) > -1 || searchByNumber() === true || searchByEmail() === true){
-            contacts[i].style.display = '';
+        if (contacts[i].id == contactId){
+            console.log('Нет проверки');
         }else{
-            contacts[i].style.display = 'none';
+            if (name.toUpperCase() === name_new.toUpperCase() || lastName.toUpperCase() === last_name_new.toUpperCase()){
+                console.log('Имя или фамилия совпала');
+                return false;
+            }
+
+            for (let n = 0; n < number.length; n++){
+                for (let nNew = 0; nNew < numbers_new.length; nNew++){
+                    if (number[n].toUpperCase() === numbers_new[nNew].value.toUpperCase()){
+                        console.log('Номер совпал');
+                        return false;
+                    }
+                }
+            }
+            for (let em = 0; em < email.length; em++){
+                for (let eNew = 0; eNew < emails_new.length; eNew++){
+                    if (email[em].toUpperCase() === emails_new[eNew].value.toUpperCase()){
+                        console.log('Email совпал');
+                        return false;
+                    }
+                }
+            }
         }
-  }
+    }
 }
