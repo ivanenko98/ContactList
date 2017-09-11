@@ -1,7 +1,12 @@
+$('#btn-add').on('click', showModal);
 
+function showModal() {
+    $('#modal-add').css('display', 'block');
 
-
-
+    $('#close').on('click', function () {
+        $('#modal-add').css('display', 'none');
+    })
+}
 
 
 
