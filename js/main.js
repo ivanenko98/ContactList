@@ -198,14 +198,11 @@ function goDetail() {
 }
 
 function deleteContact(contactId) {
-    console.log('deleteFunction');
     let returnContacts = JSON.parse(localStorage.getItem('contacts'));
     for (let i = 0; i < returnContacts.length; i++){
         if (returnContacts[i].id == contactId){
-            console.log('if');
             returnContacts.splice(i, 1);
             $('.contact-info').eq(i).remove();
-            console.log($('#contact-info').eq(i));
         }
     }
     let serialContacts = JSON.stringify(returnContacts);
@@ -213,6 +210,150 @@ function deleteContact(contactId) {
     localStorage.setItem('contacts', serialContacts);
     viewListContacts();
 }
+
+function editContact(contactId) {
+    let save = $('#save');
+    let nameE = $('#name-e');
+    let titleE = $('#title-e');
+    let numbersE = $('#numbers-e');
+    let emailsE = $('#emails-e');
+
+    let returnContacts = JSON.parse(localStorage.getItem('contacts'));
+
+    save.text('');
+    nameE.text('');
+    titleE.text('');
+    numbersE.text('');
+    emailsE.text('');
+
+    for (let i = 0; i < returnContacts.length; i++){
+        if (returnContacts[i].id == contactId){
+
+            titleE.append('<span><h1 class="title" id="title-e">Редактирование контакта</h1></span>');
+            save.append('<span><span id="'+ returnContacts[i].id +'" onclick="saveChanges(this.id)">Сохранить изменения</span><i class="fa fa-pencil"></i></span>');
+            nameE.append('<span><input id="edit-name" value='+ returnContacts[i].name +'><input id="edit-last-name" value='+ returnContacts[i].last_name +'></span>')
+
+            for (let n = 0; n < returnContacts[i].number.length; n++){
+                let nextId = Date.now() + n;
+                numbersE.append('<span><div class = "input-block-number" id="'+ nextId +'"><input class="edit-numbers" value='+ returnContacts[i].number[i] +'><i class="fa fa-times delete-input-number" id="'+ nextId +'" onclick="deleteNumberElement(this.id)" aria-hidden="true"></i></div></span>');
+            }
+
+            for (let em = 0; em < returnContacts[i].email.length; em++){
+                let nextId = Date.now() + em;
+                emailsE.append('<span><div class = "input-block-email" id="'+ nextId +'"><input class="edit-emails" value='+ returnContacts[i].email[i] +'><i class="fa fa-times delete-input-email" id="'+ nextId +'" onclick="deleteEmailElement(this.id)" aria-hidden="true"></i></div></span>');
+            }
+        }
+    }
+
+    showContact(contactId);
+
+    $('#contact-list').hide();
+    $('#contact-detail').hide();
+    $('#contact-edit').show();
+}
+
+function saveChanges(contactId) {
+    let i;
+    let nameE = $('#edit-name').val();
+    let lastNameE = $('#edit-last-name').val();
+    let numbersE = $('.edit-numbers');
+    let emailsE = $('.edit-emails');
+
+    let returnContacts = JSON.parse(localStorage.getItem('contacts'));
+
+    function validationNumber() {
+        let n;
+        for (n = 0; n < numbersE.length; n++){
+            let re = /^\d[\d\(\)\ -]{4,14}\d$/;
+            let myPhone = numbersE.eq(n).val();
+            let valid = re.test(myPhone);
+
+            if (valid){
+
+            }else{
+                return false;
+            }
+        }
+    }
+
+    function validationEmail() {
+        let em;
+        for (em = 0; em < emailsE.length; em++){
+            let re = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
+            let myEmail = emailsE.eq(em).val();
+            let valid = re.test(myEmail);
+
+            if (valid){
+
+            }else{
+                return false;
+            }
+        }
+    }
+
+    for (let i = 0; i < returnContacts.length; i++) {
+        if (returnContacts[i].id == contactId) {
+
+            if ((nameE !== '') && ((numbersE !== '') || (numbersE !== undefined))) {
+                if (validationNumber() !== false) {
+                    if (validationEmail() !== false) {
+                        // if (checkForUniqueness(nameE, lastNameE, numbersE, emailsE, contactId) !== false) {
+                            returnContacts[i] = {
+                                name: nameE,
+                                last_name: lastNameE,
+                                number: [],
+                                email: [],
+                                id: returnContacts[i].id
+                            };
+
+                            for (let n = 0; n < numbersE.length; n++) {
+                                let numbersE = $('.edit-numbers').eq(n).val();
+                                if (numbersE !== '') {
+                                    returnContacts[i].number.push(numbersE);
+                                } else {
+                                    console.log('Not Worked');
+                                }
+
+                            }
+
+                            for (let em = 0; em < emailsE.length; em++) {
+                                let emailsE = $('.edit-emails').eq(em).val();
+                                if (emailsE !== '') {
+                                    returnContacts[i].email.push(emailsE);
+                                } else {
+                                    console.log('Not Worked');
+                                }
+
+                            }
+
+                            let serialContacts = JSON.stringify(returnContacts);
+                            localStorage.setItem('contacts', serialContacts);
+                            viewListContacts();
+                            showContact(contactId);
+                        // } else {
+                        //     alert('Контакт с такими данными уже существует');
+                        // }
+                    } else {
+                        alert('Введите корректный E-mail');
+                    }
+                } else {
+                    alert('Поле "Мобильный" должно содержать только цифры (от 4 до 14 символов)');
+                }
+            } else {
+                alert('Заполните обязательные поля: Имя и Мобильный');
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 
