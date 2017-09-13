@@ -1,14 +1,218 @@
+viewListContacts();
 $('#btn-add').on('click', showModal);
+$('#btn-404').on('click', showModal);
 
 function showModal() {
-    $('#modal-add').css('display', 'block');
-
+    $('#modal-add').show();
     $('#close').on('click', function () {
-        $('#modal-add').css('display', 'none');
-    })
+        $('#modal-add').hide();
+    });
+}
+$('#add-new-contact').on('click', addContact);
+function addContact() {
+    console.log('work');
+    let contactList = $('#contact-list');
+    let contactListEmpty = $('#contact-list-empty');
+    let modal = $('#modal-add');
+    let name_new = $('#name-new').val();
+    let last_name_new = $('#last-name-new').val();
+    let numbers_new = $('.number-new');
+    let emails_new = $('.email-new');
+    let i;
+    console.log(numbers_new);
+    function validationNumber() {
+        let n;
+        for (n = 0; n < numbers_new.length; n++){
+            let re = /^\d[\d\(\)\ -]{4,14}\d$/;
+            let myPhone = numbers_new.val();
+            console.log(myPhone);
+            let valid = re.test(myPhone);
+
+            if (valid){
+
+            }else{
+                return false;
+            }
+        }
+    }
+
+    function validationEmail() {
+        let em;
+        for (em = 0; em < emails_new.length; em++){
+            let re = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
+            let myEmail = emails_new.val();
+            let valid = re.test(myEmail);
+            if (valid){
+            }else{
+                return false;
+            }
+        }
+    }
+
+    if ((name_new !== '') && (numbers_new !== '')){
+        if (validationNumber() !== false){
+            if (validationEmail() !== false){
+                // if (checkForUniqueness(name_new, last_name_new, numbers_new, emails_new) !== false){
+                    let id_contact = Date.now();
+
+                    let contact = {
+                        name: name_new,
+                        last_name: last_name_new,
+                        number: [],
+                        email: [],
+                        id: id_contact
+                    };
+
+                    for (i = 0; i < numbers_new.length; i++){
+                        // let numbers_new = $('.number-new').val();
+                        contact.number.push(numbers_new.val());
+                    }
+                    for (i = 0; i < emails_new.length; i++){
+                        // let emails_new = $('.email-new').val();
+                        contact.email.push(emails_new.val());
+                    }
+                    if (localStorage.getItem('contacts') === null){
+                        let returnContacts = [];
+                        returnContacts.push(contact);
+                        let serialContacts = JSON.stringify(returnContacts);
+                        localStorage.setItem('contacts', serialContacts);
+                        viewListContacts();
+                    }else{
+                        let returnContacts = JSON.parse(localStorage.getItem('contacts'));
+                        returnContacts.push(contact);
+                        let serialContacts = JSON.stringify(returnContacts);
+                        localStorage.setItem('contacts', serialContacts);
+                        viewListContacts();
+                    }
+                    modal.hide();
+                    contactListEmpty.hide();
+                    contactList.show();
+
+                    // $('#name-new').val() === null;
+                    // $('#last-name-new').val() === null;
+
+                    let numbers = $('#number-new');
+                    let emails = $('#email-new');
+
+                    let n;
+                    for (n = 0; n < numbers.length; n++){
+                        $('number-new').get(n).val().empty();
+                    }
+                    let em;
+                    for (em = 0; em < emails.length; em++){
+                        $('email-new').get(em).val().empty();
+                    }
+                // }else{
+                //     alert('Контакт с такими данными уже существует');
+                // }
+            }else{
+                alert('Введите корректный E-mail');
+            }
+        }else{
+            alert('Поле "Мобильный" должно содержать только цифры (от 4 до 14 символов)');
+        }
+    }else{
+        alert('Заполните обязательные поля: Имя и Мобильный');
+    }
+}
+function viewListContacts() {
+    let contactList = $('#contact-list');
+    let returnContacts = JSON.parse(localStorage.getItem('contacts'));
+
+    if (returnContacts !== null){
+
+        for (let i = 0; i < returnContacts.length; i++){
+            if ($('.contact-info')){
+                $('.contact-info').eq(i).text('');
+            }
+            contactList.append('<div class="contact-info"></div>');
+            $('.contact-info').eq(i).append('<div class="name-info"><span class="name" onclick="showContact(this.id)" id="'+ returnContacts[i].id +'">' + returnContacts[i].name + '</span>' + ' ' + '<span class="last-name" onclick="showContact(this.id)" id="'+ returnContacts[i].id +'">' + returnContacts[i].last_name + '</span></div>');
+            $('.contact-info').eq(i).append('<div class="numbers"></div>');
+
+            let numbers = $('.numbers').eq(i);
+            numbers.append('<div><span class="number">' + returnContacts[i].number[0] + '</span></div>');
+            $('.contact-info').eq(i).append('<div class="management"><ul><li><i class="fa fa-pencil" aria-hidden="true" onclick="editContact(this.id)" id="'+ returnContacts[i].id +'"></i></li><li><i class="fa fa-eye" aria-hidden="true" onclick="showContact(this.id)" id="'+ returnContacts[i].id +'"></i></li><li><i class="fa fa-trash" aria-hidden="true" onclick="deleteContact(this.id)" id="'+ returnContacts[i].id +'"></i></li></ul></div>');
+
+            $('.contact-info').each(function() {
+                if ($(this).text() === "") {
+                    $(this).remove();
+                }
+            });
+        }
+    }
+    // validation(returnContacts);
+}
+function showContact(contactId) {
+
+    let edit = $('#edit');
+    let nameD = $('#name-d');
+    let contactList = $('#contact-list');
+    let contactDetail = $('#contact-detail');
+    let contactEdit = $('#contact-edit');
+    let numbersD = $('#numbers-d');
+    let emailsD = $('#emails-d');
+
+    let returnContacts = JSON.parse(localStorage.getItem('contacts'));
+
+    edit.text('');
+    nameD.text('');
+    numbersD.text('');
+    emailsD.text('');
+
+    for (let i = 0; i < returnContacts.length; i++){
+        if (returnContacts[i].id == contactId){
+
+            // edit.removeAttribute("id");
+            // edit.setAttribute('id', contactId);
+
+            edit.append('<span onclick="editContact(this.id)" id="'+ returnContacts[i].id +'">Редактировать</span><i class="fa fa-pencil"></i>');
+            nameD.append('<span class="name-d">' + returnContacts[i].name + '</span>' + ' ' + '<span class="last-name-d">' + returnContacts[i].last_name + '</span>');
+
+            for (let n = 0; n < returnContacts[i].number.length; n++){
+                numbersD.append('<span class="numbers-el">' + returnContacts[i].number[n] + '</span>');
+            }
+            for (let em = 0; em < returnContacts[i].email.length; em++){
+                emailsD.append('<span class="emails-el">' + returnContacts[i].email[em] + '</span>');
+            }
+        }
+    }
+
+    contactList.hide();
+    contactDetail.show();
+    contactEdit.hide();
 }
 
+$('#back-d').on('click', goList);
+$('#back-e').on('click', goDetail);
 
+function goList() {
+    $('#contact-list').show();
+    $('#contact-detail').hide();
+    $('#contact-edit').hide();
+}
+
+function goDetail() {
+    $('#contact-list').hide();
+    $('#contact-detail').show();
+    $('#contact-edit').hide();
+}
+
+function deleteContact(contactId) {
+    console.log('deleteFunction');
+    let returnContacts = JSON.parse(localStorage.getItem('contacts'));
+    for (let i = 0; i < returnContacts.length; i++){
+        if (returnContacts[i].id == contactId){
+            console.log('if');
+            returnContacts.splice(i, 1);
+            $('.contact-info').eq(i).remove();
+            console.log($('#contact-info').eq(i));
+        }
+    }
+    let serialContacts = JSON.stringify(returnContacts);
+    localStorage.removeItem('contacts');
+    localStorage.setItem('contacts', serialContacts);
+    viewListContacts();
+}
 
 
 
