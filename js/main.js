@@ -19,7 +19,7 @@ function addContact() {
     let numbers_new = $('.number-new');
     let emails_new = $('.email-new');
     let i;
-    console.log(numbers_new);
+
     function validationNumber() {
         let n;
         for (n = 0; n < numbers_new.length; n++){
@@ -86,19 +86,19 @@ function addContact() {
                     contactListEmpty.hide();
                     contactList.show();
 
-                    // $('#name-new').val() === null;
-                    // $('#last-name-new').val() === null;
+                    $('#name-new').val('');
+                    $('#last-name-new').val('');
 
-                    let numbers = $('#number-new');
-                    let emails = $('#email-new');
+                    let numbers = $('.number-new');
+                    let emails = $('.email-new');
 
                     let n;
                     for (n = 0; n < numbers.length; n++){
-                        $('number-new').get(n).val().empty();
+                        numbers.eq(n).val('');
                     }
                     let em;
                     for (em = 0; em < emails.length; em++){
-                        $('email-new').get(em).val().empty();
+                        emails.eq(em).val('');
                     }
                 }else{
                     alert('Контакт с такими данными уже существует');
