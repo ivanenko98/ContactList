@@ -560,7 +560,7 @@ function searchContact(){
 function checkForUniqueness(name_new, last_name_new, numbers_new, emails_new, contactId) {
     let contacts = returnContacts;
     
-    if (contacts == null) {
+    if (contacts !== null) {
         for (let i = 0; i < contacts.length; i++){
         let name = contacts[i].name;
         let lastName = contacts[i].last_name;
