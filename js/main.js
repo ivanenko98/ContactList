@@ -561,10 +561,7 @@ function checkForUniqueness(name_new, last_name_new, numbers_new, emails_new, co
     let contacts = returnContacts;
     
     if (contacts == null) {
-        return true;
-    }
-
-    for (let i = 0; i < contacts.length; i++){
+        for (let i = 0; i < contacts.length; i++){
         let name = contacts[i].name;
         let lastName = contacts[i].last_name;
         let number = contacts[i].number;
@@ -596,4 +593,6 @@ function checkForUniqueness(name_new, last_name_new, numbers_new, emails_new, co
             }
         }
     }
+    }
+    
 }
